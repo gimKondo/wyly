@@ -22,4 +22,13 @@ Brain to predict "what is this?" for Wyly
 
 ### Run server
 
+#### On Docker
+
+1. build docker: `make build`
+2. run API sever on docker: `make run`
+3. test API: `make ping`
+4. stop API sever on docker: `make stop`
+
+#### On host OS
+
 - `poetry run uvicorn app.main:app --reload`
