@@ -1,11 +1,11 @@
 {
     "python.pythonPath": "${workspaceFolder}/.venv/bin/python",
-    "python.linting.enabled": true,
-    "python.linting.lintOnSave": true,
+    "python.terminal.activateEnvironment": false,
     "editor.formatOnSave": true,
+    "python.linting.enabled": true,
     "python.linting.flake8Enabled": true,
-    "python.linting.pylintEnabled": true,
     "python.linting.mypyEnabled": true,
+    "python.linting.pylintEnabled": false,
     "python.formatting.provider": "black",
     "[python]": {
         "editor.codeActionsOnSave": {
