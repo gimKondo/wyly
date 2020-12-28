@@ -24,9 +24,10 @@ Brain to predict "what is this?" for Wyly
 
 #### On Docker
 
-1. build docker: `docker-compose build`
-2. run docker: `docker-compose up -d`
-3. test API: `curl http://127.0.0.1:8000`
+1. build docker: `make build`
+2. run API sever on docker: `make run`
+3. test API: `make ping`
+4. stop API sever on docker: `make stop`
 
 #### On host OS
 
