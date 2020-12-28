@@ -1,4 +1,4 @@
-name: Test brain
+name: Test & Lint brain
 
 on:
   push:
@@ -12,21 +12,24 @@ defaults:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
-          python-version: "3.8"
-      - name: Setup env
+          python-version: "3.8.6"
+      - name: install poetry
         run: |
-          python -m pip install --upgrade pip
-          pip install pipenv
-          pipenv install --dev
-      - name: Run pytest
+          curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
+          echo "$HOME/.poetry/bin" >> $GITHUB_PATH
+      - name: setup virtual env
+        run: poetry install
+      - name: unit test
+        run: poetry run pytest .
+      - name: static code analysis
         run: |
-          pipenv run pytest
-      - name: Run flake8
-        run: |
-          pipenv run flake8 ./app
+          poetry run black . --check
+          poetry run isort . --check
+          poetry run mypy .
+          poetry run flake8 .
