@@ -22,4 +22,12 @@ Brain to predict "what is this?" for Wyly
 
 ### Run server
 
+#### On Docker
+
+1. build docker: `docker-compose build`
+2. run docker: `docker-compose up -d`
+3. test API: `curl http://127.0.0.1:8000`
+
+#### On host OS
+
 - `poetry run uvicorn app.main:app --reload`
