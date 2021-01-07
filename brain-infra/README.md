@@ -23,7 +23,7 @@ The infrastructure is on GCP and managed by Terraform.
 - Access authorization to GCS bucket "wyly-brain-tfstate-dev"
 - Service account
   1. create Service account
-     - required "editor" role
+     - required "owner" role
   2. download credential JSON
   3. set environment variable
      - `export GOOGLE_APPLICATION_CREDENTIALS=[path to credential JSON]`
@@ -43,3 +43,5 @@ The infrastructure is on GCP and managed by Terraform.
   `terraform init`
 2. Dry-run
   `terraform plan`
+3. Deploy
+  `terraform apply`
