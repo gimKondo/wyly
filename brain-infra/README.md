@@ -27,6 +27,15 @@ The infrastructure is on GCP and managed by Terraform.
   2. download credential JSON
   3. set environment variable
      - `export GOOGLE_APPLICATION_CREDENTIALS=[path to credential JSON]`
+- build and push API Docker
+  0. (1st time) setup gcloud command for Docker helper
+    `gcloud auth configure-docker`
+  1. move to API project directory
+    `cd ../brain`
+  2. build docker
+    `docker build -t gcr.io/wyly-brain-dev/api .`
+  3. push docker to Container Registry
+    `docker push gcr.io/wyly-brain-dev/api:latest`
 
 ## Execution
 
