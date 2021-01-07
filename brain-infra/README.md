@@ -20,4 +20,16 @@ The infrastructure is on GCP and managed by Terraform.
 - GCP project setting
   - enable Container Registry API
 - Access authorization to GCS bucket "wyly-brain-tfstate-dev"
-- Credential file is on the path written on variables.tf
+- Service account
+  1. create Service account
+     - required "editor" role
+  2. download credential JSON
+  3. set environment variable
+     - `export GOOGLE_APPLICATION_CREDENTIALS=[path to credential JSON]`
+
+## Execution
+
+1. At first, initialize terraform
+  `terraform init`
+2. Dry-run
+  `terraform plan`

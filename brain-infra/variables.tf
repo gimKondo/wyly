@@ -4,6 +4,3 @@ variable "project_name" {
 variable "region" {
   default = "asia-northeast1"
 }
-variable "credential" {
-  default = "./credentials/wyly-brain-dev.json"
-}
