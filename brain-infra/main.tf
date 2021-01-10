@@ -37,6 +37,11 @@ resource "google_cloud_run_service" "api_server" {
     percent         = 100
     latest_revision = true
   }
+  lifecycle {
+    ignore_changes = [
+      "template[0].spec[0].containers",
+    ]
+  }
 }
 
 resource "google_cloud_run_service_iam_member" "allUsers" {
