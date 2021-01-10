@@ -21,12 +21,15 @@ The infrastructure is on GCP and managed by Terraform.
   - enable Container Registry API
   - enable Cloud Run API
 - Access authorization to GCS bucket "wyly-brain-tfstate-dev"
-- Service account
+- set up Service account on GCP
   1. create Service account
      - required "owner" role
   2. download credential JSON
   3. set environment variable
      - `export GOOGLE_APPLICATION_CREDENTIALS=[path to credential JSON]`
+     - Attention
+       - On CI(GitHub Actions), secret is set JSON value
+         - dev: GCP_SA_KEY_TERRAFORM_BRAIN_DEV
 - build and push API Docker
   0. (1st time) setup gcloud command for Docker helper
     `gcloud auth configure-docker`
