@@ -1,6 +1,8 @@
 name: Deploy brain of Dev
 on:
   push:
+    branches:
+      - develop
     paths:
       - "brain/**"
       - ".github/workflows/brain-deploy-dev.yaml"
