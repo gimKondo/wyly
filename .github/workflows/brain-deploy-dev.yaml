@@ -1,0 +1,54 @@
+name: Deploy brain of Dev
+on:
+  push:
+    branches:
+      - develop
+    paths:
+      - "brain/**"
+      - ".github/workflows/brain-deploy-dev.yaml"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+    defaults:
+      run:
+        working-directory: ./brain/
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: GCP setup
+        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with:
+          version: "latest"
+          project_id: wyly-brain-dev
+          service_account_key: ${{ secrets.GCP_SA_KEY_DEPLOY_BRAIN_DEV }}
+          export_default_credentials: true
+
+      - name: build docker
+        run: gcloud builds submit --config cloudbuild_dev.yaml
+
+      - name: deploy Cloud Run
+        run: |-
+          gcloud run deploy wyly-brain --platform managed --region asia-northeast1 \
+            --image gcr.io/wyly-brain-dev/api:latest \
+            --allow-unauthenticated
+
+      - name: test API ping
+        env:
+          URL_BRAIN_DEV: ${{ secrets.API_URL_BRAIN_DEV }}
+        run: curl $URL_BRAIN_DEV
+
+      - name: Slack Notification
+        uses: homoluctus/slatify@master
+        if: always()
+        with:
+          type: ${{ job.status }}
+          job_name: "Deploy to Dev Brain"
+          mention: "here"
+          mention_if: "failure"
+          channel: "#wyly-github"
+          icon_emoji: "nyanbo-_gcp"
+          username: "Nyanbo-GCP"
+          url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          commit: true
+          token: ${{ secrets.GITHUB_TOKEN }}
