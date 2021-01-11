@@ -37,3 +37,18 @@ jobs:
         env:
           URL_BRAIN_DEV: ${{ secrets.API_URL_BRAIN_DEV }}
         run: curl $URL_BRAIN_DEV
+
+      - name: Slack Notification
+        uses: homoluctus/slatify@master
+        if: always()
+        with:
+          type: ${{ job.status }}
+          job_name: "Deploy to Dev Brain"
+          mention: "here"
+          mention_if: "failure"
+          channel: "#wyly-github"
+          icon_emoji: "nyanbo-_gcp"
+          username: "Nyanbo-GCP"
+          url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          commit: true
+          token: ${{ secrets.GITHUB_TOKEN }}
