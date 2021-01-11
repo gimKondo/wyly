@@ -18,7 +18,7 @@ terraform {
   }
 }
 
-resource "google_cloud_run_service" "default" {
+resource "google_cloud_run_service" "api_server" {
   name     = "wyly-brain"
   location = var.region
   template {
@@ -37,15 +37,20 @@ resource "google_cloud_run_service" "default" {
     percent         = 100
     latest_revision = true
   }
+  lifecycle {
+    ignore_changes = [
+      template[0].spec[0].containers,
+    ]
+  }
 }
 
 resource "google_cloud_run_service_iam_member" "allUsers" {
-  service  = google_cloud_run_service.default.name
-  location = google_cloud_run_service.default.location
+  service  = google_cloud_run_service.api_server.name
+  location = google_cloud_run_service.api_server.location
   role     = "roles/run.invoker"
   member   = "allUsers"
 }
 
 output "url" {
-  value = google_cloud_run_service.default.status[0].url
+  value = google_cloud_run_service.api_server.status[0].url
 }
