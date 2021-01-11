@@ -18,7 +18,7 @@ jobs:
       - name: tflint
         uses: devops-infra/action-tflint@0.1
 
-      - name: gcp setup
+      - name: GCP setup
         uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
         with:
           version: "latest"
