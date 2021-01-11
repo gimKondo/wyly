@@ -39,7 +39,7 @@ resource "google_cloud_run_service" "api_server" {
   }
   lifecycle {
     ignore_changes = [
-      "template[0].spec[0].containers",
+      template[0].spec[0].containers,
     ]
   }
 }
