@@ -8,6 +8,8 @@ on:
 jobs:
   terraform-plan:
     runs-on: ubuntu-20.04
+    env:
+      DEPLOY_ENV: dev
     defaults:
       run:
         working-directory: ./brain-infra/
@@ -33,7 +35,7 @@ jobs:
           cli_config_credentials_token: ${{ secrets.GCP_SA_KEY_DEPLOY_BRAIN_DEV }}
 
       - name: init
-        run: terraform init
+        run: terraform init -backend-config "bucket=wyly-brain-tfstate-${DEPLOY_ENV}"
         continue-on-error: false
 
       - name: validate

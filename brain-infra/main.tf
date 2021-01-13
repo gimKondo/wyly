@@ -13,9 +13,7 @@ provider "google" {
 }
 
 terraform {
-  backend "gcs" {
-    bucket  = "wyly-brain-tfstate-dev"
-  }
+  backend "gcs" { }
 }
 
 resource "google_cloud_run_service" "api_server" {

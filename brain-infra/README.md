@@ -44,8 +44,9 @@ The infrastructure is on GCP and managed by Terraform.
 ## Execution
 
 1. At first, initialize terraform
-  `terraform init`
+   - `terraform init -backend-config "bucket=wyly-brain-tfstate-[Deploy target name]"`
+   - Deploy target name: dev/prod
 2. Dry-run
-  `terraform plan`
+   - `terraform plan`
 3. Deploy
-  `terraform apply`
+   - `terraform apply`
