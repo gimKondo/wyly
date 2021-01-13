@@ -49,6 +49,16 @@ resource "google_cloud_run_service_iam_member" "allUsers" {
   member   = "allUsers"
 }
 
+resource "google_storage_bucket" "image-bucket" {
+  name = "wyly-brain-image-${terraform.workspace}"
+}
+
+resource "google_storage_bucket_access_control" "publish-rule" {
+  bucket = google_storage_bucket.image-bucket.name
+  role   = "READER"
+  entity = "allUsers"
+}
+
 output "url" {
   value = google_cloud_run_service.api_server.status[0].url
 }
