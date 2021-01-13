@@ -13,9 +13,7 @@ provider "google" {
 }
 
 terraform {
-  backend "gcs" {
-    bucket  = "wyly-brain-tfstate-dev"
-  }
+  backend "gcs" { }
 }
 
 resource "google_cloud_run_service" "api_server" {
@@ -49,6 +47,16 @@ resource "google_cloud_run_service_iam_member" "allUsers" {
   location = google_cloud_run_service.api_server.location
   role     = "roles/run.invoker"
   member   = "allUsers"
+}
+
+resource "google_storage_bucket" "image-bucket" {
+  name = "wyly-brain-image-${terraform.workspace}"
+}
+
+resource "google_storage_bucket_access_control" "publish-rule" {
+  bucket = google_storage_bucket.image-bucket.name
+  role   = "READER"
+  entity = "allUsers"
 }
 
 output "url" {

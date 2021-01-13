@@ -1,9 +1,11 @@
-name: Test terraform for brain
+name: Deploy infra of brain on dev
 on:
   push:
+    branches:
+      - develop
     paths:
       - "brain-infra/**"
-      - ".github/workflows/brain-infra-test.yaml"
+      - ".github/workflows/brain-infra-deploy-dev.yaml"
 
 jobs:
   terraform-plan:
@@ -16,9 +18,6 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v2
-
-      - name: tflint
-        uses: devops-infra/action-tflint@0.1
 
       - name: GCP setup
         uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
@@ -42,9 +41,5 @@ jobs:
         run: terraform workspace select ${DEPLOY_ENV}
         continue-on-error: false
 
-      - name: validate
-        run: terraform validate
-        continue-on-error: true
-
-      - name: plan
-        run: terraform plan
+      - name: apply
+        run: terraform apply -auto-approve
