@@ -38,6 +38,10 @@ jobs:
         run: terraform init -backend-config "bucket=wyly-brain-tfstate-${DEPLOY_ENV}"
         continue-on-error: false
 
+      - name: create workspace
+        run: terraform workspace new ${DEPLOY_ENV}
+        continue-on-error: false
+
       - name: validate
         run: terraform validate
         continue-on-error: true
