@@ -4,7 +4,7 @@ info:
   description: Provide service to identify species on photo
   version: 0.0.1
 servers:
-  - url: "https://example.com"
+  - url: "https://127.0.0.1:8000/"
     description: Brain server for Dev
 paths:
   /v1/identify:
