@@ -1,0 +1,102 @@
+openapi: 3.0.0
+info:
+  title: Wyly Brain
+  description: Provide service to identify species on photo
+  version: 0.0.1
+servers:
+  - url: "https://127.0.0.1:8000/"
+    description: Brain server for Dev
+paths:
+  /v1/identify:
+    post:
+      summary: >
+        return identified species on requested photo
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                apiKey:
+                  type: string
+                  description: Key to authenticate client
+                  example: xxxxxxxxxxxxxxxxxxxxxx
+                userId:
+                  type: string
+                  description: >
+                    Key to identify user.
+                    This is not required for system,
+                    but used for operation.
+                  example: u123456789
+                requestDate:
+                  type: string
+                  format: '\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z'
+                  description: ISO format
+                  example: 2021/01/15T10:45:23Z
+                photoImage:
+                  type: string
+                  format: binary
+      responses:
+        "200":
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  answers:
+                    $ref: "#/components/schemas/Answers"
+        4XX:
+          description: TBD
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+
+components:
+  schemas:
+    GenericError:
+      type: object
+      properties:
+        message:
+          type: string
+          example: something happened
+    Answers:
+      type: array
+      description: answers of identification
+      items:
+        type: object
+        properties:
+          speciesName:
+            type: string
+          respondentName:
+            type: string
+            description: character name of respondent
+          respondentImageURL:
+            type: string
+            format: uri
+            description: character image URL of respondent
+          probability:
+            type: integer
+            minimum: 0
+            maximum: 100
+            description: probability of identified species name
+          message:
+            type: string
+      example:
+        - speciesName: タチツボスミレ
+          respondentName: ミノリ
+          respondentImageURL: https://example.com/charactors/minori/image.jpg
+          probability: 80
+          message: たぶんタチツボスミレじゃないかな？
+        - speciesName: オオタチツボスミレ
+          respondentName: ミノリ
+          respondentImageURL: https://example.com/charactors/minori/image.jpg
+          probability: 60
+          message: ひょっとしたらオオタチツボスミレかもしれない。
+        - speciesName: カタクチイワシ
+          respondentName: トト
+          respondentImageURL: https://example.com/charactors/toto/image.jpg
+          probability: 20
+          message: これはカタクチイワシだよ。
