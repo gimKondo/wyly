@@ -20,7 +20,7 @@ async def index():
     return {"message": "Hello world!"}
 
 
-class IdentifyResponse(BaseModel):
+class IdentifyAnswer(BaseModel):
     speciesName: str
     respondentName: str
     respondentImageURL: str
@@ -28,7 +28,11 @@ class IdentifyResponse(BaseModel):
     message: str
 
 
-@app.post("/v1/identify", response_model=List[IdentifyResponse])
+class IdentifyResponse(BaseModel):
+    answers: List[IdentifyAnswer]
+
+
+@app.post("/v1/identify", response_model=IdentifyResponse)
 async def identify(
     apiKey: str = Form(...),
     userId: str = Form(...),
