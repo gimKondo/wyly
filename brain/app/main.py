@@ -2,7 +2,9 @@
 Application entry point
 """
 
+from typing import List
 from fastapi import FastAPI, File, Form, UploadFile
+from pydantic import BaseModel
 
 app = FastAPI()
 
@@ -17,7 +19,15 @@ async def index():
     return {"message": "Hello world!"}
 
 
-@app.post("/v1/identify")
+class IdentifyResponse(BaseModel):
+    speciesName: str
+    respondentName: str
+    respondentImageURL: str
+    probability: int
+    message: str
+
+
+@app.post("/v1/identify", response_model=List[IdentifyResponse])
 async def identify(
     apiKey: str = Form(...),
     userId: str = Form(...),
@@ -44,21 +54,21 @@ async def identify(
                 "respondentName": "ミノリ",
                 "respondentImageURL": "https://example.com/charactors/minori/image.jpg",
                 "probability": 80,
-                "message": "たぶんタチツボスミレじゃないかな？"
+                "message": "たぶんタチツボスミレじゃないかな？",
             },
             {
                 "speciesName": "オオタチツボスミレ",
                 "respondentName": "ミノリ",
                 "respondentImageURL": "https://example.com/charactors/minori/image.jpg",
                 "probability": 60,
-                "message": "ひょっとしたらオオタチツボスミレかもしれない。"
+                "message": "ひょっとしたらオオタチツボスミレかもしれない。",
             },
             {
                 "speciesName": "カタクチイワシ",
                 "respondentName": "トト",
                 "respondentImageURL": "https://example.com/charactors/toto/image.jpg",
                 "probability": 20,
-                "message": "これはカタクチイワシだよ。"
-            }
+                "message": "これはカタクチイワシだよ。",
+            },
         ]
     }
