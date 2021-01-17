@@ -3,6 +3,7 @@ Application entry point
 """
 
 from typing import List
+
 from fastapi import FastAPI, File, Form, UploadFile
 from pydantic import BaseModel
 
