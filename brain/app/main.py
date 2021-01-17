@@ -8,7 +8,7 @@ app = FastAPI()
 
 
 @app.get("/")
-def index():
+async def index():
     """Sample API
 
     Returns:
