@@ -41,6 +41,7 @@ resource "google_cloud_run_service" "api_server" {
       template[0].spec[0].containers,
     ]
   }
+  autogenerate_revision_name = true
 }
 
 resource "google_cloud_run_service_iam_member" "allUsers" {
