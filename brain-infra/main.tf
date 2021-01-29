@@ -8,12 +8,12 @@ terraform {
 }
 
 provider "google" {
-  project     = var.project_name
-  region      = "asia-northeast1"
+  project = var.project_name
+  region  = "asia-northeast1"
 }
 
 terraform {
-  backend "gcs" { }
+  backend "gcs" {}
 }
 
 resource "google_cloud_run_service" "api_server" {
@@ -24,10 +24,11 @@ resource "google_cloud_run_service" "api_server" {
       containers {
         image = "gcr.io/wyly-brain-dev/api:latest"
       }
+      service_account_name = google_service_account.cloud-run-service-account.email
     }
     metadata {
       labels = {
-        project  = "wyly"
+        project = "wyly"
       }
     }
   }
