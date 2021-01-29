@@ -20,7 +20,10 @@ The infrastructure is on GCP and managed by Terraform.
 - GCP project setting
   - enable Container Registry API
   - enable Cloud Run API
-  - enable Cloud Build API (for CI)
+- GCP project setting for deployment(on CI)
+  - enable Cloud Build API
+  - enable Identity and Access Management (IAM) API
+  - enable Cloud Resource Manager API
 - Access authorization to GCS bucket "wyly-brain-tfstate-dev"
 - set up Service account on GCP
   1. create Service account
