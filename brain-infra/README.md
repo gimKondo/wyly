@@ -20,6 +20,7 @@ The infrastructure is on GCP and managed by Terraform.
 - GCP project setting
   - enable Container Registry API
   - enable Cloud Run API
+  - enable Cloud Vision API
 - GCP project setting for deployment(on CI)
   - enable Cloud Build API
   - enable Identity and Access Management (IAM) API
