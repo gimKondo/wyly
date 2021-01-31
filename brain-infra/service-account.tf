@@ -18,7 +18,3 @@ resource "google_project_iam_member" "viewer-for-local-app-iam" {
   role   = "roles/viewer"
   member = "serviceAccount:${google_service_account.local-app-service-account.email}"
 }
-resource "google_project_iam_member" "storage-admin-for-ci-iam" {
-  role   = "roles/storage.admin"
-  member = "serviceAccount:${google_service_account.sa-for-ci.email}"
-}
