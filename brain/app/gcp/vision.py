@@ -25,7 +25,7 @@ def label_image(image_path: str) -> Dict[str, Any]:
     os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = credential_json_path
     client = vision.ImageAnnotatorClient()
 
-    with io.open(image_path, 'rb') as image_file:
+    with io.open(image_path, "rb") as image_file:
         content = image_file.read()
     image = vision.Image(content=content)
 
