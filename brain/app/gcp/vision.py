@@ -1,6 +1,7 @@
 import io
 import os
 import pathlib
+from functools import reduce
 
 from google.cloud import vision
 
@@ -21,4 +22,7 @@ def label_image(image_path):
     if response.error.message:
         raise Exception(response.error.message)
 
-    return response
+    labels = response.label_annotations
+    best_label = reduce(lambda x, y: x if x.score > y.score else y, labels)
+
+    return best_label
