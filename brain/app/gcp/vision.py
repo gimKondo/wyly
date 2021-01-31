@@ -2,11 +2,23 @@ import io
 import os
 import pathlib
 from functools import reduce
+from typing import Any, Dict
 
 from google.cloud import vision
 
 
-def label_image(image_path):
+def label_image(image_path: str) -> Dict[str, Any]:
+    """label to image by Vision API
+
+    Args:
+        image_path (str): image path to label
+
+    Raises:
+        Exception: Something happens on calling Vision API
+
+    Returns:
+        Dict[str, Any]: label of image
+    """
     this_dir = pathlib.Path(__file__).parent
     # TODO: set credential from ENV
     credential_json_path = f"{this_dir}/../credential/wyly-brain-dev.json"
