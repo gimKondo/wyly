@@ -1,6 +1,4 @@
 import io
-import os
-import pathlib
 from functools import reduce
 from typing import Any, Dict
 
@@ -19,10 +17,6 @@ def label_image(image_path: str) -> Dict[str, Any]:
     Returns:
         Dict[str, Any]: label of image
     """
-    this_dir = pathlib.Path(__file__).parent
-    # TODO: set credential from ENV
-    credential_json_path = f"{this_dir}/../credential/wyly-brain-dev.json"
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = credential_json_path
     client = vision.ImageAnnotatorClient()
 
     with io.open(image_path, "rb") as image_file:

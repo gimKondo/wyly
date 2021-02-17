@@ -1,8 +1,13 @@
 # -------------------
+# set variables
+# -------------------
+
+
+# -------------------
 # Test & Lint
 # -------------------
 test:
-	poetry run pytest
+	GOOGLE_APPLICATION_CREDENTIALS=./app/credential/gcp-key.json poetry run pytest
 
 lint:
 	poetry run black . --check
