@@ -2,10 +2,12 @@
 Application entry point
 """
 
-from typing import List
+from typing import List, Optional
 
 from fastapi import FastAPI, File, Form, UploadFile
 from pydantic import BaseModel
+
+from .service.identifier import identify
 
 app = FastAPI()
 
@@ -24,16 +26,17 @@ class IdentifyAnswer(BaseModel):
     speciesName: str
     respondentName: str
     respondentImageURL: str
-    probability: int
+    score: int
     message: str
 
 
 class IdentifyResponse(BaseModel):
     answers: List[IdentifyAnswer]
+    error: Optional[str]
 
 
 @app.post("/v1/identify", response_model=IdentifyResponse)
-async def identify(
+async def identify_v1(
     apiKey: str = Form(...),
     userId: str = Form(...),
     requestDate: str = Form(...),
@@ -52,28 +55,4 @@ async def identify(
         "file_content_type": file.content_type,
     }
     print(req_data)
-    return {
-        "answers": [
-            {
-                "speciesName": "タチツボスミレ",
-                "respondentName": "ミノリ",
-                "respondentImageURL": "https://example.com/charactors/minori/image.jpg",
-                "probability": 80,
-                "message": "たぶんタチツボスミレじゃないかな？",
-            },
-            {
-                "speciesName": "オオタチツボスミレ",
-                "respondentName": "ミノリ",
-                "respondentImageURL": "https://example.com/charactors/minori/image.jpg",
-                "probability": 60,
-                "message": "ひょっとしたらオオタチツボスミレかもしれない。",
-            },
-            {
-                "speciesName": "カタクチイワシ",
-                "respondentName": "トト",
-                "respondentImageURL": "https://example.com/charactors/toto/image.jpg",
-                "probability": 20,
-                "message": "これはカタクチイワシだよ。",
-            },
-        ]
-    }
+    return identify(file.file.read())
