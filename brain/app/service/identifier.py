@@ -12,7 +12,7 @@ def identify(image: AnyStr) -> List[Any]:
 def _build_answer(label: Dict[str, Any]):
     name = label["name"]
     score = label["score"]
-    if name == "Plant":
+    if name == "Plant" or name == "Flower":
         return {
             "answers": [
                 {
