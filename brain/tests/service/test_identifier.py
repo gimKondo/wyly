@@ -38,5 +38,5 @@ def test_build_answer_Fish():
 
 def test_build_answer_Unknown():
     result = _build_answer({"name": "SomethingUnknown", "score": 0.888})
-    assert "answers" not in result
+    assert len(result["answers"]) == 0
     assert result["error"] == "Unknown target"

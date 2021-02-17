@@ -2,7 +2,7 @@
 Application entry point
 """
 
-from typing import List
+from typing import List, Optional
 
 from fastapi import FastAPI, File, Form, UploadFile
 from pydantic import BaseModel
@@ -32,6 +32,7 @@ class IdentifyAnswer(BaseModel):
 
 class IdentifyResponse(BaseModel):
     answers: List[IdentifyAnswer]
+    error: Optional[str]
 
 
 @app.post("/v1/identify", response_model=IdentifyResponse)

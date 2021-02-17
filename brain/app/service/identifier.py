@@ -50,4 +50,4 @@ def _build_answer(label: Dict[str, Any]):
                 },
             ]
         }
-    return {"error": "Unknown target"}
+    return {"error": "Unknown target", "answers": []}
