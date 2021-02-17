@@ -4,7 +4,7 @@ FROM python:3.8-slim as poetry-exporter
 WORKDIR /app
 RUN pip install poetry
 COPY pyproject.toml poetry.lock ./
-RUN poetry export -f requirements.txt > requirements.txt
+RUN poetry export --without-hashes -f requirements.txt > requirements.txt
 
 # Runtime container
 FROM python:3.8-slim
