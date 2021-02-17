@@ -9,6 +9,7 @@ python = "^3.8"
 fastapi = "^0.63.0"
 uvicorn = "^0.13.2"
 python-multipart = "^0.0.5"
+google-cloud-vision = "^2.1.0"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^3.8.4"

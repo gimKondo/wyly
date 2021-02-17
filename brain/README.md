@@ -20,6 +20,15 @@ Brain to predict "what is this?" for Wyly
 
 - execute `poetry update` on adding/updating dependencies
 
+### Run test
+
+At first, locate GCP credential file on `./app/credential/gcp-sa-key.json`.  
+Service account should be `viewer` role to use Vision API.
+
+- run unit test: `make test`
+- run lint: `make lint`
+- run unit test and lint: `make check`
+
 ### Run server
 
 #### On Docker
