@@ -13,6 +13,8 @@ defaults:
 jobs:
   test:
     runs-on: ubuntu-20.04
+    env:
+      GOOGLE_APPLICATION_CREDENTIALS: ./app/credential/gcp-sa-key.json
 
     steps:
       - uses: actions/checkout@v2
@@ -25,11 +27,11 @@ jobs:
           echo "$HOME/.poetry/bin" >> $GITHUB_PATH
       - name: setup virtual env
         run: poetry install
+      - name: set credential file
+        env:
+          GCP_SA_KEY_DEPLOY_BRAIN: ${{ secrets.GCP_SA_KEY_DEPLOY_BRAIN_DEV }}
+        run: echo ${GCP_SA_KEY_DEPLOY_BRAIN}>${GOOGLE_APPLICATION_CREDENTIALS}
       - name: unit test
-        run: poetry run pytest .
+        run: make test
       - name: static code analysis
-        run: |
-          poetry run black . --check
-          poetry run isort . --check
-          poetry run mypy .
-          poetry run flake8 .
+        run: make lint
