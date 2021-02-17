@@ -26,7 +26,7 @@ class IdentifyAnswer(BaseModel):
     speciesName: str
     respondentName: str
     respondentImageURL: str
-    score: int
+    score: float
     message: str
 
 
