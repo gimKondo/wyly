@@ -22,7 +22,7 @@ Brain to predict "what is this?" for Wyly
 
 ### Run test
 
-At first, locate GCP credential file on `./app/credential/gcp-key.json`.  
+At first, locate GCP credential file on `./app/credential/gcp-sa-key.json`.  
 Service account should be `viewer` role to use Vision API.
 
 - run unit test: `make test`
