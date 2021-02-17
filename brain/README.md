@@ -35,7 +35,7 @@ Service account should be `viewer` role to use Vision API.
 
 1. build docker: `make build`
 2. run API sever on docker: `make run`
-3. test API: `make ping`
+3. test API: `make ping` or `make identify`
 4. stop API sever on docker: `make stop`
 
 #### On host OS
