@@ -11,4 +11,4 @@ def test_label_image():
     with io.open(sample_image_path, "rb") as image_file:
         image = image_file.read()
     label = label_image(image)
-    assert label.description == "Plant"
+    assert label["name"] == "Plant"

@@ -28,4 +28,7 @@ def label_image(image: AnyStr) -> Dict[str, Any]:
     labels = response.label_annotations
     best_label = reduce(lambda x, y: x if x.score > y.score else y, labels)
 
-    return best_label
+    return {
+        "name": best_label.description,
+        "score": best_label.score,
+    }
