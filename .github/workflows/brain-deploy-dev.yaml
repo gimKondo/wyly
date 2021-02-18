@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - develop
+      - tmp/dev
     paths:
       - "brain/**"
       - ".github/workflows/brain-deploy-dev.yaml"
