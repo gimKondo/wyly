@@ -20,6 +20,8 @@ def test_ocr_image():
 
     with io.open(sample_image_path, "rb") as image_file:
         image = image_file.read()
-    texts = ocr_image(image)
-    assert len(texts) > 3
-    assert texts[0]["text"] == "This"
+    text_info = ocr_image(image)
+    assert text_info["all_text"].startswith("This is") is True
+    answers = text_info["answers"]
+    assert len(answers) > 3
+    assert answers[0]["text"] == "This"

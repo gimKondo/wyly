@@ -34,7 +34,7 @@ def label_image(image: AnyStr) -> Dict[str, Any]:
     }
 
 
-def ocr_image(image: AnyStr) -> List[Dict[str, Any]]:
+def ocr_image(image: AnyStr) -> Dict[str, Any]:
     """OCR image by Vision API
 
     Args:
@@ -44,7 +44,7 @@ def ocr_image(image: AnyStr) -> List[Dict[str, Any]]:
         Exception: Something happens on calling Vision API
 
     Returns:
-        List[Dict[str, Any]]: detected texts info
+        Dict[str, Any]: detected texts info
     """
     client = vision.ImageAnnotatorClient()
 
@@ -56,7 +56,7 @@ def ocr_image(image: AnyStr) -> List[Dict[str, Any]]:
         raise Exception(response.error.message)
 
     if len(response.text_annotations) < 2:
-        return []
+        return {"error": ""}
 
     texts = []
     for annotation in response.text_annotations[1:]:
@@ -75,4 +75,5 @@ def ocr_image(image: AnyStr) -> List[Dict[str, Any]]:
             },
         }
         texts.append(text_data)
-    return texts
+
+    return {"all_text": response.text_annotations[0].description, "answers": texts}
