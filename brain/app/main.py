@@ -81,6 +81,7 @@ class OcrTextInfo(BaseModel):
 
 
 class OcrResponse(BaseModel):
+    all_text: Optional[str]
     answers: List[OcrTextInfo]
     error: Optional[str]
 
@@ -104,7 +105,4 @@ async def ocr_v1(
         print(f"[[AUDIT]] invalid request. request:{req_data}")
         raise HTTPException(status_code=403, detail="Forbidden")
     print(req_data)
-    texts = ocr_image(file.file.read())
-    if len(texts) == 0:
-        return {"error": "Not found any texts."}
-    return {"answers": texts}
+    return ocr_image(file.file.read())
