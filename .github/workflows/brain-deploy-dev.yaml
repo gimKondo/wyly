@@ -28,10 +28,13 @@ jobs:
         run: gcloud builds submit --config cloudbuild_dev.yaml
 
       - name: deploy Cloud Run
+        env:
+          BRAIN_API_KEY: ${{ secrets.BRAIN_API_KEY_DEV }}
         run: |-
           gcloud run deploy wyly-brain --platform managed --region asia-northeast1 \
             --image gcr.io/wyly-brain-dev/api:latest \
-            --allow-unauthenticated
+            --allow-unauthenticated \
+            --set-env-vars BRAIN_API_KEY=${BRAIN_API_KEY}
 
       - name: test API ping
         env:

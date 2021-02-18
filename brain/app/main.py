@@ -4,10 +4,11 @@ Application entry point
 
 from typing import List, Optional
 
-from fastapi import FastAPI, File, Form, UploadFile
+from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from pydantic import BaseModel
 
 from .service.identifier import identify
+from .service.security import is_valid_api_key
 
 app = FastAPI()
 
@@ -54,5 +55,8 @@ async def identify_v1(
         "file_name": file.filename,
         "file_content_type": file.content_type,
     }
+    if not is_valid_api_key(apiKey):
+        print(f"[[AUDIT]] invalid request. request:{req_data}")
+        raise HTTPException(status_code=403, detail="Forbidden")
     print(req_data)
     return identify(file.file.read())
