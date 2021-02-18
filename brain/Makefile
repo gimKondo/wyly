@@ -41,5 +41,12 @@ identify:
 	 -F "apiKey=aaaa" -F "userId=bbbb" -F "requestDate=2020/02/18" \
 	 -F "file=@./samples/komakusa.jpg;type=image/jpeg"
 
+ocr:
+	curl -X POST "http://127.0.0.1:8000/v1/ocr" \
+	 -H "accept: application/json" \
+	 -H "Content-Type: multipart/form-data" \
+	 -F "apiKey=aaaa" \
+	 -F "file=@./samples/note.jpg;type=image/jpeg"
+
 log:
 	docker-compose logs -f
