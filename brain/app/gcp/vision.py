@@ -1,5 +1,5 @@
 from functools import reduce
-from typing import Any, AnyStr, Dict, List
+from typing import Any, AnyStr, Dict
 
 from google.cloud import vision
 
