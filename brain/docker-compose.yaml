@@ -4,6 +4,7 @@ services:
   app:
     environment:
       GOOGLE_APPLICATION_CREDENTIALS: ./app/credential/gcp-sa-key.json
+      BRAIN_API_KEY: aaaa
     build: .
     volumes:
       - ./app:/app
