@@ -1,0 +1,47 @@
+name: Deploy Brain Demo UI to Firebase for dev
+
+on:
+  push:
+    branches:
+      - "feature/**"
+      - "develop"
+    paths:
+      - "brain-demo/**"
+      - ".github/workflows/brain-demo-deploy-dev.yaml"
+
+jobs:
+  build_and_preview:
+    runs-on: ubuntu-20.04
+    defaults:
+      run:
+        working-directory: ./brain-demo/
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+      - name: install firebase-tools
+        run: npm install -g firebase-tools
+      - name: install packages for functions
+        run: cd functions && npm install
+      - name: deploy to firebase
+        env:
+          FIREBASE_TOKEN: ${{ secrets.BRAIN_DEMO_FIREBASE_TOKEN_DEV }}
+        run: |
+          firebase use wyly-brain-dev --token ${FIREBASE_TOKEN}
+          firebase deploy --token ${FIREBASE_TOKEN}
+      - name: Slack Notification
+        uses: homoluctus/slatify@master
+        if: always()
+        with:
+          type: ${{ job.status }}
+          job_name: "Deploy to Dev Firebase"
+          mention: "here"
+          mention_if: "failure"
+          channel: "#wyly-github"
+          icon_emoji: "nyanbo-_firebase"
+          username: "Nyanbo-F"
+          url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          commit: true
+          token: ${{ secrets.GITHUB_TOKEN }}
