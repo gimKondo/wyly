@@ -5,6 +5,9 @@ on:
     branches:
       - "feature/**"
       - "develop"
+    paths:
+      - "brain-demo/**"
+      - ".github/workflows/brain-demo-deploy-dev.yaml"
 
 jobs:
   build_and_preview:
