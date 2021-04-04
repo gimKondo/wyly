@@ -40,7 +40,7 @@ jobs:
         if: always()
         with:
           type: ${{ job.status }}
-          job_name: "Deploy to Dev Firebase"
+          job_name: "Deploy to Dev Firebase https://wyly-brain-dev.web.app/"
           mention: "here"
           mention_if: "failure"
           channel: "#wyly-github"

@@ -1,0 +1,41 @@
+name: Deploy Brain Demo UI to Firebase for dev
+
+on:
+  push:
+    branches:
+      - "feature/**"
+    paths:
+      - "brain-demo/**"
+      - ".github/workflows/brain-demo-test.yaml"
+
+jobs:
+  test-page:
+    runs-on: ubuntu-20.04
+    defaults:
+      run:
+        working-directory: ./brain-demo/src
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+      - name: install dependencies for nuxt project
+        run: npm ci
+      - name: lint
+        run: npm run lint
+  test-func:
+    runs-on: ubuntu-20.04
+    defaults:
+      run:
+        working-directory: ./brain-demo/functions
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+      - name: install dependencies for firebase functions
+        run: npm ci
+      - name: lint
+        run: npm run lint

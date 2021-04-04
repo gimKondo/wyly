@@ -1,12 +1,21 @@
 {
   "name": "wyly-demo-app",
   "scripts": {
-    "dev": "nuxt",
-    "build": "nuxt build",
-    "generate": "nuxt generate",
-    "start": "nuxt start"
+    "lint": "eslint --ext .ts,.js,.vue",
+    "dev": "nuxt-ts",
+    "build": "nuxt-ts build",
+    "generate": "nuxt-ts generate",
+    "start": "nuxt-ts start"
   },
   "dependencies": {
-    "nuxt": "^2.15.3"
+    "@nuxt/typescript-runtime": "^2.1.0",
+    "nuxt": "^2.15.3",
+    "nuxt-property-decorator": "^2.9.1"
+  },
+  "devDependencies": {
+    "@nuxt/types": "^2.15.4",
+    "@nuxt/typescript-build": "^2.1.0",
+    "@nuxtjs/eslint-config-typescript": "^6.0.0",
+    "eslint": "^7.23.0"
   }
 }
