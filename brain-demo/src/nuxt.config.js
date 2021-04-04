@@ -1,13 +1,13 @@
 export default {
   generate: {
-    dir: '../public'
+    dir: "../public"
   },
-  buildModules: ['@nuxt/typescript-build'],
+  buildModules: ["@nuxt/typescript-build"],
   typescript: {
     typeCheck: {
       eslint: {
-        files: './**/*.{ts,js,vue}'
+        files: "./**/*.{ts,js,vue}"
       }
     }
   }
-}
+};
