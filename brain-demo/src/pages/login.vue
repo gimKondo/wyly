@@ -1,7 +1,9 @@
 <template>
   <div class="container">
     <div>
-      <h1 class="title">Login Page</h1>
+      <h1 class="title">
+        Login Page
+      </h1>
       <div>
         <button class="button--grey" @click="authGoogle">
           Googleでログイン
@@ -25,12 +27,12 @@ export default Vue.extend({
       const auth = new Auth(this.$accessor, {
         // This is not credential data
         apiKey: "AIzaSyATEv2Ur0Hust5U0EkcI_k1Vntaypdouss",
-        authDomain: "wyly-brain-dev.firebaseapp.com",
+        authDomain: "wyly-brain-dev.firebaseapp.com"
       });
       await auth.login(PROVIDERS.Google);
       this.$router.push("/");
-    },
-  },
+    }
+  }
 });
 </script>
 

@@ -5,7 +5,7 @@
 import { Component, Vue } from "nuxt-property-decorator";
 
 @Component({
-  middleware: "auth-filter",
+  middleware: "auth-filter"
 })
 export default class Index extends Vue {
   get helloWorld(): string {
