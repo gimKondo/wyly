@@ -2,7 +2,10 @@ export default {
   generate: {
     dir: "../public"
   },
-  buildModules: ["@nuxt/typescript-build"],
+  buildModules: [
+    "@nuxt/typescript-build",
+    "nuxt-typed-vuex"
+  ],
   typescript: {
     typeCheck: {
       eslint: {
