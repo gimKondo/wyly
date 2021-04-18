@@ -24,11 +24,7 @@ export default Vue.extend({
   },
   methods: {
     async authGoogle() {
-      const auth = new Auth(this.$accessor, {
-        // This is not credential data
-        apiKey: "AIzaSyATEv2Ur0Hust5U0EkcI_k1Vntaypdouss",
-        authDomain: "wyly-brain-dev.firebaseapp.com"
-      });
+      const auth = new Auth(this.$accessor, this.$config.firebase);
       await auth.login(PROVIDERS.Google);
       this.$router.push("/");
     }
