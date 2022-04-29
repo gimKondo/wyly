@@ -47,6 +47,8 @@ The infrastructure is on GCP and managed by Terraform.
 
 ## Execution
 
+0. Before execute this, you should set credential JSON like following
+   - `export GOOGLE_APPLICATION_CREDENTIALS=[path to credential JSON]`
 1. At first, initialize terraform
    - `terraform init -backend-config "bucket=wyly-brain-tfstate-[Deploy target name]"`
    - Deploy target name: dev/prod
