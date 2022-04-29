@@ -10,3 +10,9 @@ jobs:
     steps:
       - name: Exit with success
         run: exit 0
+  dummy-terraform-plan:
+    name: terraform-plan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Exit with success
+        run: exit 0
