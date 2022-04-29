@@ -17,10 +17,10 @@ jobs:
         working-directory: ./brain-infra/
     steps:
       - name: checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: GCP setup
-        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        uses: google-github-actions/setup-gcloud@main
         with:
           version: "latest"
           project_id: wyly-brain-dev
