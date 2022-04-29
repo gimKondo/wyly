@@ -1,6 +1,6 @@
 name: Test terraform for brain
 on:
-  push:
+  pull_request:
     paths:
       - "brain-infra/**"
       - ".github/workflows/brain-infra-test.yaml"
