@@ -1,0 +1,23 @@
+name: Deploy Brain Demo UI to Firebase for dev
+
+on:
+  pull_request:
+    paths:
+      - "app-web/**"
+      - ".github/workflows/app-web-test.yaml"
+
+jobs:
+  test-page:
+    runs-on: ubuntu-20.04
+    defaults:
+      run:
+        working-directory: ./app-web/
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action
+        with:
+          flutter-version: 2.10.5
+          channel: 'stable'
+      - run: flutter pub get
+      - run: flutter test
+      - run: flutter analyze
