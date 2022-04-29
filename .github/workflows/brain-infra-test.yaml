@@ -15,7 +15,7 @@ jobs:
         working-directory: ./brain-infra/
     steps:
       - name: checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: tflint
         uses: devops-infra/action-tflint@0.1

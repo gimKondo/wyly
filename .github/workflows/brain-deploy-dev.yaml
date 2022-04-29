@@ -14,7 +14,7 @@ jobs:
       run:
         working-directory: ./brain/
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: GCP setup
         uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
