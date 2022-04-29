@@ -21,7 +21,7 @@ jobs:
         uses: devops-infra/action-tflint@0.1
 
       - name: GCP setup
-        uses: google-github-actions/setup-gcloud@main
+        uses: google-github-actions/setup-gcloud@v0
         with:
           version: "latest"
           project_id: wyly-brain-dev
