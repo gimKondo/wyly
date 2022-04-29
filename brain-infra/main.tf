@@ -52,7 +52,8 @@ resource "google_cloud_run_service_iam_member" "allUsers" {
 }
 
 resource "google_storage_bucket" "image-bucket" {
-  name = "wyly-brain-image-${terraform.workspace}"
+  name     = "wyly-brain-image-${terraform.workspace}"
+  location = var.region
 }
 
 resource "google_storage_bucket_access_control" "publish-rule" {
