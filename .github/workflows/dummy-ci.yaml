@@ -1,0 +1,12 @@
+name: Dummy CI
+
+on:
+  pull_request:
+
+jobs:
+  dummy-test-app-web:
+    name: test-app-web
+    runs-on: ubuntu-latest
+    steps:
+      - name: Exit with success
+        run: exit 0
