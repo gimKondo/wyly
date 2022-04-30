@@ -8,9 +8,18 @@ This is web application of wyly.
 
 ## Setup development environment
 
+### fvm and flutter
+
 1. Install flutter by fvm: `fvm install`
 2. Ensure that web is installed: `fvm flutter devices`
    - If "Chrome (web) • chrome • web-javascript" is showed, that OK
+
+### env
+
+1. Copy "assets/sample.env" to "assets/.env"
+2. Set each values
+   - values of Firebase is on Firebase console
+   - Google Auth value is on [GCP console](https://console.cloud.google.com/apis/credentials)
 
 ## Run on local
 

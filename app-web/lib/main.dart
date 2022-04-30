@@ -1,7 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:wyly_app/screen/sign_up_screen.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:wyly_app/screen/login_screen.dart';
 
-void main() => runApp(const SignUpApp());
+Future<void> main() async {
+  await dotenv.load();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: FirebaseOptions(
+      apiKey: dotenv.get('FIREBASE_API_KEY'),
+      appId: dotenv.get('FIREBASE_APP_ID'),
+      messagingSenderId: dotenv.get('FIREBASE_MESSAGING_SENDER_ID'),
+      projectId: dotenv.get('FIREBASE_PROJECT_ID'),
+    ),
+  );
+  runApp(const SignUpApp());
+}
 
 class SignUpApp extends StatelessWidget {
   const SignUpApp({Key? key}) : super(key: key);
@@ -10,7 +24,7 @@ class SignUpApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: {
-        '/': (context) => const SignUpScreen(),
+        '/': (context) => const LoginScreen(),
         '/welcome': (context) => const WelcomeScreen(),
       },
     );
