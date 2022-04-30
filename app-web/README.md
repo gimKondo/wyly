@@ -28,3 +28,9 @@ If you want to shutdown app, just close chrome window.
 
 1. Change version on `app-web/.fvm/fvm_config.json`
 2. Change version on `.github/workflows/app-web-test.yaml`
+
+### Attention on adding new authentication setting
+
+Set allowed origin for each client IDs on GCP console.  
+`make up` command use 7357 port, so you have to add <http://localhost:7357> to run at local.  
+Refer <https://pub.dev/packages/google_sign_in_web>.
